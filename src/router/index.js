@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-  {},
   {
-    // component: () =>
-    //   import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/",
+    name: "index",
+    component: () => import("@/views/IndexView.vue"),
   },
 ];
 
