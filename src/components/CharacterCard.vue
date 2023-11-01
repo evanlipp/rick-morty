@@ -2,11 +2,17 @@
   <div class="character">
     <p>{{ character.name }}</p>
     <p>{{ character.species }}</p>
+    <EpisodeLink
+      v-for="(episode, index) in character.episode.slice(0, 5)"
+      :key="index"
+      :episodeUrl="episode"
+    />
   </div>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import EpisodeLink from "@/components/EpisodeLink.vue";
+import { defineProps, ref } from "vue";
 
 const props = defineProps({
   character: {
