@@ -1,5 +1,6 @@
 <template>
   <div class="character">
+    <img :src="character.image" alt="character avatar" />
     <p>{{ character.name }}</p>
     <p>{{ character.species }}</p>
     <EpisodeLink
