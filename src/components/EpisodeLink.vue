@@ -3,24 +3,12 @@
 </template>
 
 <script setup>
-import { defineProps, onMounted, ref } from "vue";
-import axios from "axios";
+import { defineProps } from "vue";
 
 const props = defineProps({
-  episodeUrl: {
-    type: String,
+  episode: {
+    type: Object,
     required: true,
   },
-});
-
-const episode = ref({});
-
-const fetchEpisode = async () => {
-  const response = await axios.get(props.episodeUrl);
-  episode.value = response.data;
-};
-
-onMounted(() => {
-  fetchEpisode();
 });
 </script>
