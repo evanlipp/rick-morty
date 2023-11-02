@@ -1,4 +1,10 @@
 <template>
+  <input
+    v-model="searchByNameQuery"
+    @input="fetchFilteredCharacters"
+    type="text"
+    placeholder="find character"
+  />
   <div class="characters">
     <CharacterCard
       v-for="character in characters"
@@ -6,7 +12,11 @@
       :character="character"
     />
   </div>
-  <div class="scroll-observer" ref="scrollObserver"></div>
+  <div
+    v-show="characters.length > 0"
+    class="scroll-observer"
+    ref="scrollObserver"
+  ></div>
 </template>
 
 <script setup>
@@ -17,9 +27,29 @@ import { onMounted, ref } from "vue";
 const characters = ref([]);
 const page = ref(0);
 const scrollObserver = ref(null);
+const searchByNameQuery = ref("");
+
+const url = ref("https://rickandmortyapi.com/api/character/");
+
+const fetchFilteredCharacters = async () => {
+  try {
+    url.value = `https://rickandmortyapi.com/api/character?name=${searchByNameQuery.value}`;
+    const response = await axios(url.value);
+    characters.value = response.data.results;
+  } catch {
+    return;
+  }
+};
+
+const fetchCharacters = async () => {
+  if (!url.value) return;
+  const response = await axios(url.value);
+  url.value = response.data.info.next;
+  characters.value = [...characters.value, ...response.data.results];
+};
 
 onMounted(() => {
-  loadCharacters();
+  fetchCharacters();
 
   const options = {
     rootMargin: "0px",
@@ -28,23 +58,13 @@ onMounted(() => {
 
   const callback = (entries, observer) => {
     if (entries[0].isIntersecting) {
-      loadCharacters();
+      fetchCharacters();
     }
   };
 
   const observer = new IntersectionObserver(callback, options);
   observer.observe(scrollObserver.value);
 });
-
-const loadCharacters = async () => {
-  page.value += 1;
-  const response = await axios(`https://rickandmortyapi.com/api/character`, {
-    params: {
-      page: page.value,
-    },
-  });
-  characters.value = [...characters.value, ...response.data.results];
-};
 </script>
 
 <style lang="scss">
