@@ -2,10 +2,12 @@
   <div class="character">
     <img :src="character.image" alt="character avatar" />
     <p>{{ character.id }}</p>
-    <p>{{ character.name }}</p>
+    <p @click="$router.push(`/character${character.id}`)">
+      {{ character.name }}
+    </p>
     <p>{{ character.species }}</p>
     <p
-      @click="$router.push(`/${character.id}`)"
+      @click="$router.push(`/episode${episode.id}`)"
       v-for="episode in episodes"
       :key="episode.id"
       :episode="episode"

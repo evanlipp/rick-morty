@@ -6,6 +6,16 @@ const routes = [
     name: "index",
     component: () => import("@/views/IndexView.vue"),
   },
+  {
+    path: "/character:id",
+    name: "character",
+    component: () => import("@/views/CharacterView.vue"),
+  },
+  {
+    path: "/episode:id",
+    name: "episode",
+    component: () => import("@/views/EpisodeView.vue"),
+  },
 ];
 
 const router = createRouter({
