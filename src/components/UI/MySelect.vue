@@ -1,6 +1,6 @@
 <template>
   <select :value="modelValue" @change="changeOption">
-    <option value=""></option>
+    <option value="">reset</option>
     <option v-for="option in options" :key="option.value" :value="option.value">
       {{ option.name }}
     </option>
