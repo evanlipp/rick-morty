@@ -4,16 +4,18 @@
     <p>{{ character.id }}</p>
     <p>{{ character.name }}</p>
     <p>{{ character.species }}</p>
-    <EpisodeLink
+    <p
+      @click="$router.push(`/${character.id}`)"
       v-for="episode in episodes"
       :key="episode.id"
       :episode="episode"
-    />
+    >
+      {{ episode.name }}
+    </p>
   </div>
 </template>
 
 <script setup>
-import EpisodeLink from "@/components/EpisodeLink.vue";
 import { defineProps, ref } from "vue";
 import axios from "axios";
 
