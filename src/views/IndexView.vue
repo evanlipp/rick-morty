@@ -1,8 +1,7 @@
 <template>
-  <input
+  <MyInput
     v-model="searchByNameQuery"
     @input="fetchFilteredCharacters"
-    type="text"
     placeholder="find character"
   />
   <MySelect
@@ -25,6 +24,7 @@
 </template>
 
 <script setup>
+import MyInput from "@/components/UI/MyInput.vue";
 import MySelect from "@/components/UI/MySelect.vue";
 import CharacterCard from "@/components/CharacterCard.vue";
 import axios from "axios";
