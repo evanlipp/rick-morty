@@ -7,12 +7,11 @@
     </p>
     <p>{{ character.species }}</p>
     <p
-      @click="$router.push(`/episode${episode.id}`)"
+      @click="$router.push(`/episode${episode.data.id}`)"
       v-for="episode in episodes"
-      :key="episode.id"
-      :episode="episode"
+      :key="episode.data"
     >
-      {{ episode.name }}
+      {{ episode.data.name }}
     </p>
   </div>
 </template>
@@ -30,25 +29,11 @@ const props = defineProps({
 
 const episodes = ref([]);
 
-const episodesLinks = ref(props.character.episode);
+const episodesLinks = ref(props.character.episode.slice(0, 5));
 
-const episodesNumbers = episodesLinks.value.slice(0, 5).map((url) => {
-  const splittedUrl = url.split("/");
-  return Number(splittedUrl[splittedUrl.length - 1]);
-});
+const requests = episodesLinks.value.map((episode) => axios(episode));
 
-const fetchEpisodes = async () => {
-  const response = await axios(
-    `https://rickandmortyapi.com/api/episode/${episodesNumbers}`
-  );
-  if (!Array.isArray(response.data)) {
-    episodes.value = [response.data];
-  } else {
-    episodes.value = response.data;
-  }
-};
-
-fetchEpisodes();
+Promise.all(requests).then((response) => (episodes.value = response));
 </script>
 
 <style lang="scss" scoped>
