@@ -16,6 +16,8 @@
       :character="character"
     />
   </div>
+  <p v-else>{{ isCharactersLoading }}</p>
+  <p v-if="errorMessage">{{ errorMessage }}</p>
   <div
     v-show="characters.length > 19"
     class="scroll-observer"
@@ -39,17 +41,23 @@ const sortParams = ref([
   { value: "dead", name: "dead" },
   { value: "unknown", name: "unknown" },
 ]);
+const errorMessage = ref("");
+const isCharactersLoading = ref("");
 
 const url = ref("https://rickandmortyapi.com/api/character");
 
 const fetchFilteredCharacters = async () => {
   try {
+    isCharactersLoading.value = "Loading...";
     url.value = `https://rickandmortyapi.com/api/character?name=${searchByNameQuery.value}&status=${selectedSortParam.value}`;
     const response = await axios(url.value);
     url.value = response.data.info.next;
     characters.value = response.data.results;
   } catch {
     characters.value = [];
+    errorMessage.value = "There is no such characters";
+  } finally {
+    isCharactersLoading.value = "";
   }
 };
 

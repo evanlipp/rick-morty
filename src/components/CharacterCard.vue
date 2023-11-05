@@ -9,7 +9,7 @@
     <p
       @click="$router.push(`/episode${episode.data.id}`)"
       v-for="episode in episodes"
-      :key="episode.data"
+      :key="episode.data.id"
     >
       {{ episode.data.name }}
     </p>
@@ -33,7 +33,11 @@ const episodesLinks = ref(props.character.episode.slice(0, 5));
 
 const requests = episodesLinks.value.map((episode) => axios(episode));
 
-Promise.all(requests).then((response) => (episodes.value = response));
+Promise.all(requests)
+  .then((response) => {
+    episodes.value = response;
+  })
+  .catch(() => alert("something went wrong"));
 </script>
 
 <style lang="scss" scoped>

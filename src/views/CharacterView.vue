@@ -16,10 +16,14 @@ const route = useRoute();
 const character = ref();
 
 const fetchCharacter = async () => {
-  const response = await axios(
-    `https://rickandmortyapi.com/api/character/${route.params.id}`
-  );
-  character.value = response.data;
+  try {
+    const response = await axios(
+      `https://rickandmortyapi.com/api/character/${route.params.id}`
+    );
+    character.value = response.data;
+  } catch {
+    alert("something went wrong");
+  }
 };
 fetchCharacter();
 </script>

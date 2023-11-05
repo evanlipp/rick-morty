@@ -22,14 +22,18 @@ const episode = ref();
 const characters = ref();
 
 const fetchEpisode = async () => {
-  const response = await axios(
-    `https://rickandmortyapi.com/api/episode/${route.params.id}`
-  );
-  episode.value = response.data;
-  const charactersLinks = response.data.characters;
+  try {
+    const response = await axios(
+      `https://rickandmortyapi.com/api/episode/${route.params.id}`
+    );
+    episode.value = response.data;
+    const charactersLinks = response.data.characters;
 
-  const requests = charactersLinks.map((link) => axios(link));
-  Promise.all(requests).then((response) => (characters.value = response));
+    const requests = charactersLinks.map((link) => axios(link));
+    Promise.all(requests).then((response) => (characters.value = response));
+  } catch {
+    alert("something went wrong");
+  }
 };
 
 fetchEpisode();
