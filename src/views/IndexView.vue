@@ -42,8 +42,7 @@
 import MyInput from "@/components/UI/MyInput.vue";
 import MySelect from "@/components/UI/MySelect.vue";
 import CharacterCard from "@/components/CharacterCard.vue";
-import axios from "axios";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import { useStore } from "@/store/index";
 
 const store = useStore();

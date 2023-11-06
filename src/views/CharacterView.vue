@@ -1,9 +1,13 @@
 <template>
-  <div v-if="character">
-    <img :src="character.image" alt="character avatar" />
-    <p>{{ character.name }}</p>
-    <p>{{ character.species }}</p>
-    <p>{{ character.location.name }}</p>
+  <div class="wrapper">
+    <div class="profile" v-if="character">
+      <img class="avatar" :src="character.image" alt="character avatar" />
+      <div class="profile__info">
+        <h2>name: {{ character.name }}</h2>
+        <p>species: {{ character.species }}</p>
+        <p>location: {{ character.location.name }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,5 +29,23 @@ const fetchCharacter = async () => {
     alert("something went wrong");
   }
 };
+
 fetchCharacter();
 </script>
+
+<style lang="scss" scoped>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 17% 0;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.avatar {
+  border-radius: 50%;
+}
+</style>

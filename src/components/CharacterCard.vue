@@ -1,7 +1,11 @@
 <template>
   <div class="character">
     <div class="character__header">
-      <img :src="character.image" alt="character avatar" />
+      <img
+        class="avatar avatar_middle"
+        :src="character.image"
+        alt="character avatar"
+      />
       <div class="character__info">
         <p class="link" @click="$router.push(`/character${character.id}`)">
           {{ character.name }}
@@ -76,5 +80,11 @@ Promise.all(requests)
     flex-direction: column;
     text-align: center;
   }
+}
+
+.avatar {
+  border-radius: 50%;
+  max-width: 150px;
+  max-height: 150px;
 }
 </style>
