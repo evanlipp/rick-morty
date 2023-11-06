@@ -63,8 +63,7 @@ const setSelectParam = (value) => {
   store.fetchFilteredCharacters();
 };
 
-store.fetchCharacters();
-
+store.fetchFilteredCharacters();
 onMounted(() => {
   const options = {
     rootMargin: "0px",
