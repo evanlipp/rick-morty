@@ -1,28 +1,41 @@
 <template>
-  <MyInput
-    v-model="searchByNameQuery"
-    @input="fetchFilteredCharacters"
-    placeholder="find character"
-  />
-  <MySelect
-    v-model="selectedSortParam"
-    :options="sortParams"
-    @update:model-value="fetchFilteredCharacters"
-  />
-  <div v-if="characters.length > 0" class="characters">
-    <CharacterCard
-      v-for="character in characters"
-      :key="character.id"
-      :character="character"
-    />
+  <div class="wrapper">
+    <div class="header">
+      <h1>
+        Multiverse <br />
+        characters <br />
+        database
+      </h1>
+      <div class="sort-form">
+        <p>filter by name</p>
+        <MyInput
+          v-model="searchByNameQuery"
+          @input="fetchFilteredCharacters"
+          placeholder="find character"
+        />
+        <p>filter by status</p>
+        <MySelect
+          v-model="selectedSortParam"
+          :options="sortParams"
+          @update:model-value="fetchFilteredCharacters"
+        />
+      </div>
+    </div>
+    <div class="cards-list" v-if="characters.length > 0">
+      <CharacterCard
+        v-for="character in characters"
+        :key="character.id"
+        :character="character"
+      />
+    </div>
+    <p v-else>{{ isCharactersLoading }}</p>
+    <p v-if="errorMessage">{{ errorMessage }}</p>
+    <div
+      v-show="characters.length > 19"
+      class="scroll-observer"
+      ref="scrollObserver"
+    ></div>
   </div>
-  <p v-else>{{ isCharactersLoading }}</p>
-  <p v-if="errorMessage">{{ errorMessage }}</p>
-  <div
-    v-show="characters.length > 19"
-    class="scroll-observer"
-    ref="scrollObserver"
-  ></div>
 </template>
 
 <script setup>
@@ -53,6 +66,7 @@ const fetchFilteredCharacters = async () => {
     const response = await axios(url.value);
     url.value = response.data.info.next;
     characters.value = response.data.results;
+    errorMessage.value = "";
   } catch {
     characters.value = [];
     errorMessage.value = "There is no such characters";
@@ -91,10 +105,31 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss">
-.characters {
+<style lang="scss" scoped>
+.wrapper {
   display: flex;
-  padding: 100px;
   flex-direction: column;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 40px;
+}
+
+.sort-form {
+  height: 200px;
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cards-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 20px;
 }
 </style>

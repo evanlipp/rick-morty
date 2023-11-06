@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+p {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+img {
+  border-radius: 50%;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+h1 {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 400;
+  font-size: 40px;
+}
+
+.link {
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
+}
