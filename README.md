@@ -1,5 +1,5 @@
-### Customize configuration
-See [deploy](https://multiversedatabase.surge.sh/).
+
+# See [deploy](https://multiversedatabase.surge.sh/).
 
 ## Project setup
 ```
