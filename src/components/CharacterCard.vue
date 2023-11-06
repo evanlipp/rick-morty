@@ -1,11 +1,7 @@
 <template>
   <div class="character">
     <div class="character__header">
-      <img
-        class="avatar avatar_middle"
-        :src="character.image"
-        alt="character avatar"
-      />
+      <img class="avatar" :src="character.image" alt="character avatar" />
       <div class="character__info">
         <p class="link" @click="$router.push(`/character${character.id}`)">
           {{ character.name }}
@@ -40,9 +36,7 @@ const props = defineProps({
 });
 
 const episodes = ref([]);
-
 const episodesLinks = ref(props.character.episode.slice(0, 5));
-
 const requests = episodesLinks.value.map((episode) => axios(episode));
 
 Promise.all(requests)
@@ -81,7 +75,6 @@ Promise.all(requests)
     text-align: center;
   }
 }
-
 .avatar {
   border-radius: 50%;
   max-width: 150px;

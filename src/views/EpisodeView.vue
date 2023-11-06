@@ -5,7 +5,7 @@
       <p>premiere: {{ episode.air_date }}</p>
       <p>cast:</p>
       <div class="characters" v-if="characters">
-        <p
+        <div
           @click="$router.push(`/character${character.data.id}`)"
           v-for="character in characters"
           :key="character.id"
@@ -15,7 +15,7 @@
             :src="character.data.image"
             alt="character avatar"
           />
-        </p>
+        </div>
       </div>
       <p v-else>Loading...</p>
     </div>
@@ -39,8 +39,10 @@ const fetchEpisode = async () => {
     episode.value = response.data;
     const charactersLinks = response.data.characters;
 
-    const requests = charactersLinks.map((link) => axios(link));
-    Promise.all(requests).then((response) => (characters.value = response));
+    const charactersRequests = charactersLinks.map((link) => axios(link));
+    Promise.all(charactersRequests).then(
+      (response) => (characters.value = response)
+    );
   } catch {
     alert("something went wrong");
   }
@@ -55,7 +57,6 @@ fetchEpisode();
   justify-content: center;
   padding: 17% 0;
 }
-
 .episode {
   display: flex;
   flex-direction: column;
@@ -63,7 +64,6 @@ fetchEpisode();
   gap: 10px;
   text-align: center;
 }
-
 .characters {
   max-width: 1200px;
   display: flex;

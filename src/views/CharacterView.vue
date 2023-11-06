@@ -39,7 +39,6 @@ fetchCharacter();
   justify-content: center;
   padding: 17% 0;
 }
-
 .profile {
   display: flex;
   align-items: center;

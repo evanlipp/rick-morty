@@ -89,13 +89,11 @@ onMounted(() => {
   max-width: 1200px;
   margin: auto;
 }
-
 .header {
   display: flex;
   justify-content: space-between;
   padding-top: 40px;
 }
-
 .sort-form {
   height: 200px;
   width: 49%;
