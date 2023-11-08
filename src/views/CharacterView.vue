@@ -13,8 +13,8 @@
 
 <script setup>
 import axios from "axios";
-import { useRoute } from "vue-router";
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
 const character = ref();

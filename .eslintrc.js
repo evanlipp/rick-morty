@@ -7,6 +7,7 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "eslint:recommended",
     "plugin:prettier/recommended",
+    "plugin:import/recommended",
   ],
   parserOptions: {
     parser: "@babel/eslint-parser",
@@ -17,6 +18,25 @@ module.exports = {
     "no-unused-vars": "off",
     "no-undef": "off",
     "no-duplicate-imports": "error",
+    "import/no-unresolved": "off",
+    "import/order": [
+      2,
+      {
+        groups: [
+          "external",
+          "builtin",
+          "index",
+          "sibling",
+          "parent",
+          "internal",
+          "type",
+        ],
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
+      },
+    ],
     "vue/attributes-order": [
       "error",
       {

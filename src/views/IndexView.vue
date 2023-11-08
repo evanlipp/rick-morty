@@ -39,11 +39,11 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from "vue";
+import CharacterCard from "@/components/CharacterCard.vue";
 import MyInput from "@/components/UI/MyInput.vue";
 import MySelect from "@/components/UI/MySelect.vue";
-import CharacterCard from "@/components/CharacterCard.vue";
-import { onMounted, ref } from "vue";
-import { useStore } from "@/store/index";
+import { useStore } from "@/store/index.js";
 
 const store = useStore();
 const scrollObserver = ref(null);
