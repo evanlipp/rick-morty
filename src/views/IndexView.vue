@@ -10,8 +10,8 @@
         <p>filter by name</p>
         <MyInput
           v-model="store.searchByNameParam"
-          @update:model-value="setSearchParam"
           placeholder="find character"
+          @update:model-value="setSearchParam"
         />
         <p>filter by status</p>
         <MySelect
@@ -21,7 +21,7 @@
         />
       </div>
     </div>
-    <div class="cards-list" v-if="store.charactersCount > 0">
+    <div v-if="store.charactersCount > 0" class="cards-list">
       <CharacterCard
         v-for="character in store.characters"
         :key="character.id"
@@ -32,8 +32,8 @@
     <p v-if="store.errorMessage">{{ store.errorMessage }}</p>
     <div
       v-show="store.charactersCount > 19"
-      class="scroll-observer"
       ref="scrollObserver"
+      class="scroll-observer"
     ></div>
   </div>
 </template>
@@ -55,15 +55,16 @@ const sortParams = ref([
 
 const setSearchParam = (value) => {
   store.setName(value);
-  store.fetchFilteredCharacters();
+  store.fetchCharacters();
 };
 
 const setSelectParam = (value) => {
   store.setSelect(value);
-  store.fetchFilteredCharacters();
+  store.fetchCharacters();
 };
 
-store.fetchFilteredCharacters();
+store.fetchCharacters();
+
 onMounted(() => {
   const options = {
     rootMargin: "0px",
@@ -72,7 +73,7 @@ onMounted(() => {
 
   const callback = (entries, observer) => {
     if (entries[0].isIntersecting) {
-      store.fetchCharacters();
+      store.fetchMoreCharacters();
     }
   };
 
@@ -88,11 +89,13 @@ onMounted(() => {
   max-width: 1200px;
   margin: auto;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
   padding-top: 40px;
 }
+
 .sort-form {
   height: 200px;
   width: 49%;
@@ -100,6 +103,7 @@ onMounted(() => {
   flex-direction: column;
   gap: 10px;
 }
+
 .cards-list {
   display: flex;
   justify-content: space-between;

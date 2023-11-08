@@ -13,10 +13,10 @@
     <div class="character__episodes-list">
       <p>Episodes appearance:</p>
       <p
-        class="link"
-        @click="$router.push(`/episode${episode.data.id}`)"
         v-for="episode in episodes"
         :key="episode.data.id"
+        class="link"
+        @click="$router.push(`/episode${episode.data.id}`)"
       >
         {{ episode.data.name }}
       </p>
@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
 import axios from "axios";
 
 const props = defineProps({
@@ -75,6 +75,7 @@ Promise.all(requests)
     text-align: center;
   }
 }
+
 .avatar {
   border-radius: 50%;
   max-width: 150px;

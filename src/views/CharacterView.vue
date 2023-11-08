@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="profile" v-if="character">
+    <div v-if="character" class="profile">
       <img class="avatar" :src="character.image" alt="character avatar" />
       <div class="profile__info">
         <h2>name: {{ character.name }}</h2>

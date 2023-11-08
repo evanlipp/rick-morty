@@ -24,7 +24,7 @@ export const useStore = defineStore(
       selectedSortParam.value = value;
     };
 
-    const fetchCharacters = async () => {
+    const fetchMoreCharacters = async () => {
       try {
         if (!url.value) return;
         const response = await axios(url.value);
@@ -35,7 +35,7 @@ export const useStore = defineStore(
       }
     };
 
-    const fetchFilteredCharacters = async () => {
+    const fetchCharacters = async () => {
       try {
         isCharactersLoading.value = "Loading...";
         url.value = `https://rickandmortyapi.com/api/character?name=${searchByNameParam.value}&status=${selectedSortParam.value}`;
@@ -60,8 +60,8 @@ export const useStore = defineStore(
       selectedSortParam,
       setName,
       setSelect,
+      fetchMoreCharacters,
       fetchCharacters,
-      fetchFilteredCharacters,
     };
   },
   { persist: true }

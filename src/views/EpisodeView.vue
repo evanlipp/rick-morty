@@ -1,14 +1,14 @@
 <template>
   <div class="wrapper">
-    <div class="episode" v-if="episode">
+    <div v-if="episode" class="episode">
       <h2>Episode name: {{ episode.name }}</h2>
       <p>premiere: {{ episode.air_date }}</p>
       <p>cast:</p>
-      <div class="characters" v-if="characters">
+      <div v-if="characters" class="characters">
         <div
-          @click="$router.push(`/character${character.data.id}`)"
           v-for="character in characters"
           :key="character.id"
+          @click="$router.push(`/character${character.data.id}`)"
         >
           <img
             class="avatar"
